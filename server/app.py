@@ -17,7 +17,11 @@ db.init_app(app)
 api = Api(app)
 
 class Plants(Resource):
-    pass
+    def get(self):
+        response_dict_list = [p.to_dict() for p in Plant.query.all()]
+        response = make_response(response_dict_list, 200)
+        return response
+api.add_resource(Plants, '/plants')
 
 class PlantByID(Resource):
     pass
